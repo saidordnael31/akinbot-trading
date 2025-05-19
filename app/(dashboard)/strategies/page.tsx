@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
+import Link from "next/link"
 import { Zap, TrendingUp, BarChart2, Clock, AlertCircle, CheckCircle2 } from "lucide-react"
 
 export default function StrategiesPage() {
@@ -38,10 +39,18 @@ export default function StrategiesPage() {
         <main className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex flex-col items-start justify-between space-y-2 md:flex-row md:items-center md:space-y-0">
             <h2 className="text-3xl font-bold tracking-tight">Estratégias de Trading</h2>
-            <Button>
-              <Zap className="mr-2 h-4 w-4" />
-              Criar Nova Estratégia
-            </Button>
+            <div className="flex space-x-2">
+              <Button variant="outline" asChild>
+                <Link href="/backtesting">
+                  <BarChart2 className="mr-2 h-4 w-4" />
+                  Testar Estratégias
+                </Link>
+              </Button>
+              <Button>
+                <Zap className="mr-2 h-4 w-4" />
+                Criar Nova Estratégia
+              </Button>
+            </div>
           </div>
 
           <Card>
