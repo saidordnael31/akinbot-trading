@@ -1,0 +1,353 @@
+// lib/translations.ts
+export const translations = {
+  pt: {
+    main: {
+      title: "Invista no Futuro Imobiliário", // Changed from Agronegócio
+      subtitle: "SET Token: um token cripto imobiliário",
+    },
+    packages: {
+      raizDoAgro: {
+        name: "Imóvel Essencial", // Changed from Raiz do Agro
+        bonus: "5% de bônus em tokens",
+      },
+      agroDeriPlus: {
+        name: "Imóvel Prime", // Changed from AgroDeri+
+        bonus: "10% de bônus em tokens",
+      },
+      agroMaster: {
+        name: "Imóvel Master", // Changed from Agro Master
+        bonus: "15% de bônus em tokens",
+      },
+      agroElite: {
+        name: "Imóvel Elite", // Changed from Agro Elite
+        bonus: "25% de bônus em tokens",
+      },
+      agroWhale: {
+        name: "Imóvel Premium", // Changed from Agro Whale
+        bonus: "30% de bônus em tokens",
+      },
+      institutional: {
+        name: "Imóvel Institucional", // Changed from Institucional
+        bonus: "35% de bônus em tokens",
+      },
+    },
+  },
+  en: {
+    main: {
+      title: "Invest in the Real Estate Future", // Changed from Agribusiness
+      subtitle: "SET Token: a real estate crypto token",
+    },
+    packages: {
+      raizDoAgro: {
+        name: "Essential Property", // Changed from Agro Root
+        bonus: "5% token bonus",
+      },
+      agroDeriPlus: {
+        name: "Prime Property", // Changed from AgroDeri+
+        bonus: "10% token bonus",
+      },
+      agroMaster: {
+        name: "Master Property", // Changed from Agro Master
+        bonus: "15% token bonus",
+      },
+      agroElite: {
+        name: "Elite Property", // Changed from Agro Elite
+        bonus: "25% token bonus",
+      },
+      agroWhale: {
+        name: "Premium Property", // Changed from Agro Whale
+        bonus: "30% token bonus",
+      },
+      institutional: {
+        name: "Institutional Property", // Changed from Institutional
+        bonus: "35% token bonus",
+      },
+    },
+  },
+  es: {
+    main: {
+      title: "Invierte en el Futuro Inmobiliario", // Changed from Agronegocio
+      subtitle: "SET Token: un token cripto inmobiliario",
+    },
+    packages: {
+      raizDoAgro: {
+        name: "Propiedad Esencial", // Changed from Raíz del Agro
+        bonus: "5% de bonificación en tokens",
+      },
+      agroDeriPlus: {
+        name: "Propiedad Prime", // Changed from AgroDeri+
+        bonus: "10% de bonificación en tokens",
+      },
+      agroMaster: {
+        name: "Propiedad Master", // Changed from Agro Master
+        bonus: "15% de bonificación en tokens",
+      },
+      agroElite: {
+        name: "Propiedad Elite", // Changed from Agro Elite
+        bonus: "25% de bonificación en tokens",
+      },
+      agroWhale: {
+        name: "Propiedad Premium", // Changed from Agro Whale
+        bonus: "30% de bonificación en tokens",
+      },
+      institutional: {
+        name: "Propiedad Institucional", // Changed from Institucional
+        bonus: "35% de bonificación en tokens",
+      },
+    },
+  },
+  fr: {
+    main: {
+      title: "Investissez dans l'Avenir Immobilier", // Changed from Agrobusiness
+      subtitle: "SET Token: un jeton crypto immobilier",
+    },
+    packages: {
+      raizDoAgro: {
+        name: "Propriété Essentielle", // Changed from Racine de l'Agro
+        bonus: "5% de bonus en tokens",
+      },
+      agroDeriPlus: {
+        name: "Propriété Prime", // Changed from AgroDeri+
+        bonus: "10% de bonus en tokens",
+      },
+      agroMaster: {
+        name: "Propriété Maître", // Changed from Agro Master
+        bonus: "15% de bonus en tokens",
+      },
+      agroElite: {
+        name: "Propriété Élite", // Changed from Agro Elite
+        bonus: "25% de bonus en tokens",
+      },
+      agroWhale: {
+        name: "Propriété Premium", // Changed from Agro Whale
+        bonus: "30% de bonus en tokens",
+      },
+      institutional: {
+        name: "Propriété Institutionnelle", // Changed from Institutionnel
+        bonus: "35% de bonus en tokens",
+      },
+    },
+  },
+  de: {
+    main: {
+      title: "Investieren Sie in die Immobilien-Zukunft", // Changed from Agribusiness
+      subtitle: "SET Token: ein Immobilien-Krypto-Token",
+    },
+    packages: {
+      raizDoAgro: {
+        name: "Grundstück Essential", // Changed from Agro Wurzel
+        bonus: "5% Token-Bonus",
+      },
+      agroDeriPlus: {
+        name: "Grundstück Prime", // Changed from AgroDeri+
+        bonus: "10% Token-Bonus",
+      },
+      agroMaster: {
+        name: "Grundstück Master", // Changed from Agro Master
+        bonus: "15% Token-Bonus",
+      },
+      agroElite: {
+        name: "Grundstück Elite", // Changed from Agro Elite
+        bonus: "25% Token-Bonus",
+      },
+      agroWhale: {
+        name: "Grundstück Premium", // Changed from Agro Whale
+        bonus: "30% Token-Bonus",
+      },
+      institutional: {
+        name: "Grundstück Institutionell", // Changed from Institutionell
+        bonus: "35% Token-Bonus",
+      },
+    },
+  },
+  ru: {
+    header: {
+      preOrder: "Предзаказ",
+      trackInvestment: "Отслеживать Инвестиции",
+    },
+    main: {
+      title: "Инвестируйте в Будущее Недвижимости", // Changed from Агробизнеса
+      subtitle: "SET Token: крипто‑токен недвижимости",
+    },
+    packages: {
+      raizDoAgro: {
+        name: "Недвижимость Эссенциал", // Changed from Корень Агро
+        bonus: "5% бонус токенов",
+      },
+      agroDeriPlus: {
+        name: "Недвижимость Прайм", // Changed from AgroDeri+
+        bonus: "10% бонус токенов",
+      },
+      agroMaster: {
+        name: "Недвижимость Мастер", // Changed from Агро Мастер
+        bonus: "15% бонус токенов",
+      },
+      agroElite: {
+        name: "Недвижимость Элита", // Changed from Агро Элита
+        bonus: "25% бонус токенов",
+      },
+      agroWhale: {
+        name: "Недвижимость Премиум", // Changed from Агро Кит
+        bonus: "30% бонус токенов",
+      },
+      institutional: {
+        name: "Недвижимость Институционал", // Changed from Институциональный
+        bonus: "35% бонус токенов",
+      },
+    },
+  },
+  zh: {
+    header: {
+      preOrder: "预订",
+      trackInvestment: "跟踪投资",
+    },
+    main: {
+      title: "投资房地产的未来", // Changed from 农业综合企业的未来
+      subtitle: "SET 代币：房地产加密代币",
+    },
+    packages: {
+      raizDoAgro: {
+        name: "基础房产", // Changed from 农业根基
+        bonus: "5% 代币奖励",
+      },
+      agroDeriPlus: {
+        name: "优质房产", // Changed from AgroDeri+
+        bonus: "10% 代币奖励",
+      },
+      agroMaster: {
+        name: "大师房产", // Changed from 农业大师
+        bonus: "15% 代币奖励",
+      },
+      agroElite: {
+        name: "精英房产", // Changed from 农业精英
+        bonus: "25% 代币奖励",
+      },
+      agroWhale: {
+        name: "高级房产", // Changed from 农业巨鲸
+        bonus: "30% 代币奖励",
+      },
+      institutional: {
+        name: "机构房产", // Changed from 机构
+        bonus: "35% 代币奖励",
+      },
+    },
+  },
+}
+
+// app/page.tsx
+const packages = [
+  {
+    id: "starter",
+    name: t("packages.raizDoAgro.name"), // Updated to use translation key
+    minValue: 50,
+    maxValue: 249,
+    cliff: 0,
+    vesting: 12,
+    bonus: t("packages.raizDoAgro.bonus"),
+    features: ["Tokens SET proporcionais", "Grupo WhatsApp oficial", "Alertas de mercado", "Campanhas da comunidade"],
+    color: "blue",
+  },
+  {
+    id: "plus",
+    name: t("packages.agroDeriPlus.name"), // Updated to use translation key
+    minValue: 250,
+    maxValue: 999,
+    cliff: 0,
+    vesting: 18,
+    bonus: t("packages.agroDeriPlus.bonus"),
+    features: [
+      "Tudo do pacote anterior",
+      "Acesso antecipado staking",
+      "NFT investidor pioneiro",
+      "5% desconto próxima rodada",
+      "Grupo fechado AgroDeri+",
+    ],
+    color: "blue",
+    popular: true,
+  },
+  {
+    id: "premium",
+    name: t("packages.agroMaster.name"), // Updated to use translation key
+    minValue: 1000,
+    maxValue: 4999,
+    cliff: 3,
+    vesting: 24,
+    bonus: t("packages.agroMaster.bonus"),
+    features: [
+      "Tokens SET + 15% bônus",
+      "NFT exclusivo Master",
+      "Acesso aos fundadores",
+      "Staking taxa promocional",
+      "Prioridade nas próximas fases",
+    ],
+    color: "yellow",
+  },
+  {
+    id: "elite",
+    name: t("packages.agroElite.name"), // Updated to use translation key
+    minValue: 5000,
+    maxValue: 19999,
+    cliff: 6,
+    vesting: 24,
+    bonus: t("packages.agroElite.bonus"),
+    features: [
+      "Tokens SET + 25% bônus",
+      "NFT Elite exclusivo",
+      "Reuniões estratégicas",
+      "Staking VIP",
+      "Acesso antecipado a novos produtos",
+    ],
+    color: "purple",
+  },
+  {
+    id: "whale",
+    name: t("packages.agroWhale.name"), // Updated to use translation key
+    minValue: 20000,
+    maxValue: 99999,
+    cliff: 6,
+    vesting: 36,
+    bonus: t("packages.agroWhale.bonus"),
+    features: [
+      "Tokens SET + 30% bônus",
+      "NFT Whale ultra-raro",
+      "Consultoria personalizada",
+      "Staking premium",
+      "Participação em decisões estratégicas",
+    ],
+    color: "indigo",
+  },
+  {
+    id: "institutional",
+    name: t("packages.institutional.name"), // Updated to use translation key
+    minValue: 100000,
+    maxValue: 500000,
+    cliff: 6,
+    vesting: 36,
+    bonus: t("packages.institutional.bonus"),
+    features: [
+      "Tokens SET + 35% bônus",
+      "NFT VIP institucional",
+      "Acesso direto à diretoria",
+      "Staking institucional",
+      "Participação no conselho consultivo",
+    ],
+    color: "gray",
+  },
+];
+
+// app/investor-dashboard/page.tsx
+const getPackageInfo = (value) => {
+  if (value >= 100000) {
+    return { name: t("packages.institutional.name"), bonus: 35, cliff: 6, vesting: 36 }
+  } else if (value >= 20000) {
+    return { name: t("packages.agroWhale.name"), bonus: 30, cliff: 6, vesting: 36 }
+  } else if (value >= 5000) {
+    return { name: t("packages.agroElite.name"), bonus: 25, cliff: 6, vesting: 24 }
+  } else if (value >= 1000) {
+    return { name: t("packages.agroMaster.name"), bonus: 15, cliff: 3, vesting: 24 }
+  } else if (value >= 250) {
+    return { name: t("packages.agroDeriPlus.name"), bonus: 10, cliff: 0, vesting: 18 }
+  } else {
+    return { name: t("packages.raizDoAgro.name"), bonus: 5, cliff: 0, vesting: 12 }
+  }
+}
