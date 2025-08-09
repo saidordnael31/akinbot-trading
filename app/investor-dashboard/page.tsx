@@ -327,7 +327,7 @@ export default function InvestorDashboard() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-green-600 mx-auto mb-4" />
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
           <p className="text-gray-600">Carregando seus dados de investimento...</p>
           <p className="text-sm text-gray-500 mt-2">CPF: {cpf}</p>
         </div>
@@ -384,8 +384,8 @@ export default function InvestorDashboard() {
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src="/images/agro-logo.png" alt="AgroDeri Logo" className="h-8 w-auto" />
-            <span className="text-2xl font-bold text-gray-900">AgroDeri</span>
-            <Badge variant="secondary" className="ml-2">
+            <span className="text-2xl font-bold text-blue-800">AgroDeri</span>
+            <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">
               Área do Investidor
             </Badge>
           </div>
@@ -394,7 +394,12 @@ export default function InvestorDashboard() {
               <RefreshCw className="mr-2 h-4 w-4" />
               Atualizar
             </Button>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLogout}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
               <LogOut className="mr-2 h-4 w-4" />
               Sair
             </Button>
@@ -474,7 +479,7 @@ export default function InvestorDashboard() {
                 <CardContent>
                   <div className="text-2xl font-bold">
                     {userProfile.contract_generated_successfully ? (
-                      <Badge className="bg-green-100 text-green-800">Ativo</Badge>
+                      <Badge className="bg-blue-100 text-blue-800">Ativo</Badge>
                     ) : (
                       <Badge variant="secondary">Pendente</Badge>
                     )}
@@ -609,6 +614,11 @@ export default function InvestorDashboard() {
                         variant={
                           userProfile.contract_generated_successfully || contractGenerated ? "default" : "secondary"
                         }
+                        className={
+                          userProfile.contract_generated_successfully || contractGenerated
+                            ? "bg-blue-100 text-blue-800"
+                            : ""
+                        }
                       >
                         {userProfile.contract_generated_successfully || contractGenerated ? (
                           <>
@@ -644,7 +654,7 @@ export default function InvestorDashboard() {
                   {/* Botão de Gerar Contrato - só aparece se tem investimento mas não tem contrato */}
                   {hasInvestment && !userProfile.contract_generated_successfully && (
                     <Button
-                      className="w-full bg-green-600 hover:bg-green-700 text-white"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                       onClick={handleGenerateContract}
                       disabled={contractGenerating}
                     >
@@ -733,8 +743,8 @@ export default function InvestorDashboard() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <CheckCircle className="h-4 w-4 text-green-600" />
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-4 w-4 text-blue-600" />
                     </div>
                     <div>
                       <p className="font-medium">Cadastro Realizado</p>
@@ -745,11 +755,11 @@ export default function InvestorDashboard() {
                   <div className="flex items-center gap-4">
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        userProfile.total_deposit_value > 0 ? "bg-green-100" : "bg-gray-100"
+                        userProfile.total_deposit_value > 0 ? "bg-blue-100" : "bg-gray-100"
                       }`}
                     >
                       {userProfile.total_deposit_value > 0 ? (
-                        <CheckCircle className="h-4 w-4 text-green-600" />
+                        <CheckCircle className="h-4 w-4 text-blue-600" />
                       ) : (
                         <Clock className="h-4 w-4 text-gray-400" />
                       )}
@@ -773,11 +783,11 @@ export default function InvestorDashboard() {
                   <div className="flex items-center gap-4">
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        userProfile.contract_generated_successfully ? "bg-green-100" : "bg-gray-100"
+                        userProfile.contract_generated_successfully ? "bg-blue-100" : "bg-gray-100"
                       }`}
                     >
                       {userProfile.contract_generated_successfully ? (
-                        <CheckCircle className="h-4 w-4 text-green-600" />
+                        <CheckCircle className="h-4 w-4 text-blue-600" />
                       ) : (
                         <Clock className="h-4 w-4 text-gray-400" />
                       )}
@@ -885,7 +895,7 @@ export default function InvestorDashboard() {
                 <div className="text-center space-y-4">
                   <div className="text-6xl">✅</div>
                   <div>
-                    <h3 className="text-lg font-semibold text-green-600 mb-2">Resgate Solicitado com Sucesso!</h3>
+                    <h3 className="text-lg font-semibold text-blue-600 mb-2">Resgate Solicitado com Sucesso!</h3>
                     <p className="text-sm text-gray-600 mb-4">
                       Seu reembolso será processado e o pagamento será enviado para a chave PIX registrada no seu CPF.
                     </p>
@@ -998,7 +1008,7 @@ export default function InvestorDashboard() {
                 <div className="text-center space-y-4">
                   <div className="text-6xl">🪙</div>
                   <div>
-                    <h3 className="text-lg font-semibold text-green-600 mb-2">Resgate Crypto Solicitado!</h3>
+                    <h3 className="text-lg font-semibold text-blue-600 mb-2">Resgate Crypto Solicitado!</h3>
                     <p className="text-sm text-gray-600 mb-4">
                       Seu resgate em {userProfile?.payment_details?.cryptoName} foi solicitado com sucesso e será
                       processado em breve.

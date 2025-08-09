@@ -1053,7 +1053,7 @@ export default function AgroDeriLanding() {
   }
 
   const getColorClass = (color: string) => {
-    if (color === "blue") return "border-blue-200 bg-blue-50 text-[#202d3d]"
+    if (color === "blue") return "border-blue-200 bg-blue-50 text-blue-800"
     if (color === "yellow") return "border-yellow-200 bg-yellow-50 text-yellow-600"
     if (color === "purple") return "border-purple-200 bg-purple-50 text-purple-600"
     if (color === "indigo") return "border-indigo-200 bg-indigo-50 text-indigo-600"
@@ -1068,7 +1068,7 @@ export default function AgroDeriLanding() {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-green-600 mx-auto mb-4" />
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
           <p className="text-gray-600">Carregando...</p>
         </div>
       </div>
@@ -1107,15 +1107,15 @@ export default function AgroDeriLanding() {
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {/* Substituído a imagem da logo pelo texto "SET TOKEN" */}
-            <span className="text-2xl font-bold text-[#202d3d]">SET TOKEN</span>
+            <span className="text-2xl font-bold text-blue-800">SET TOKEN</span>
           </div>
           <div className="flex items-center gap-4">
-            <Badge variant="secondary" className="bg-[#a1d5df] text-[#202d3d] border-[#a1d5df]">
+            <Badge variant="secondary" className="bg-blue-100 text-blue-800 border-blue-100">
               {t("header.preOrder")}
             </Badge>
             <Button
               size="lg"
-              className="bg-[#202d3d] hover:bg-[#1a2530] text-white px-6 py-2 font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
               onClick={() => setShowLoginModal(true)}
             >
               {t("header.trackInvestment")}
@@ -1139,16 +1139,16 @@ export default function AgroDeriLanding() {
               <div key={index} className="flex items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    index <= currentStep ? "bg-[#202d3d] text-white" : "bg-gray-200 text-gray-600"
+                    index <= currentStep ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-600"
                   }`}
                 >
                   {index < currentStep ? <CheckCircle className="h-4 w-4" /> : index + 1}
                 </div>
-                <span className={`ml-2 text-sm ${index <= currentStep ? "text-[#202d3d]" : "text-gray-500"}`}>
+                <span className={`ml-2 text-sm ${index <= currentStep ? "text-blue-600" : "text-gray-500"}`}>
                   {step}
                 </span>
                 {index < steps.length - 1 && (
-                  <div className={`w-16 h-0.5 mx-4 ${index < currentStep ? "bg-[#202d3d]" : "bg-gray-200"}`} />
+                  <div className={`w-16 h-0.5 mx-4 ${index < currentStep ? "bg-blue-600" : "bg-gray-200"}`} />
                 )}
               </div>
             ))}
@@ -1160,10 +1160,10 @@ export default function AgroDeriLanding() {
               {packages.map((pkg) => (
                 <Card
                   key={pkg.id}
-                  className={`relative ${pkg.popular ? "ring-2 ring-[#202d3d] scale-105" : ""} hover:shadow-lg transition-all`}
+                  className={`relative ${pkg.popular ? "ring-2 ring-blue-600 scale-105" : ""} hover:shadow-lg transition-all`}
                 >
                   {pkg.popular && (
-                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#202d3d]">
+                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600">
                       {t("packages.mostPopular")}
                     </Badge>
                   )}
@@ -1175,7 +1175,7 @@ export default function AgroDeriLanding() {
                     <div className="text-2xl font-bold text-gray-900">
                       R$ {pkg.minValue.toLocaleString()} - R$ {pkg.maxValue.toLocaleString()}
                     </div>
-                    <CardDescription className="text-[#202d3d] font-semibold">{pkg.bonus}</CardDescription>
+                    <CardDescription className="text-blue-800 font-semibold">{pkg.bonus}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4 text-sm">
@@ -1196,13 +1196,13 @@ export default function AgroDeriLanding() {
                     <ul className="space-y-2">
                       {pkg.features.map((feature, index) => (
                         <li key={index} className="flex items-start gap-2 text-sm">
-                          <CheckCircle className="h-4 w-4 text-[#202d3d] mt-0.5" />
+                          <CheckCircle className="h-4 w-4 text-blue-600 mt-0.5" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
 
-                    <Button className="w-full bg-[#202d3d] hover:bg-[#1a2530]" onClick={() => handlePackageSelect(pkg)}>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={() => handlePackageSelect(pkg)}>
                       {t("packages.selectPackage")}
                     </Button>
                   </CardContent>
@@ -1284,14 +1284,14 @@ export default function AgroDeriLanding() {
 
                 {/* Só mostrar campos de senha se não for usuário pré-cadastrado */}
                 {isPrefilledUser ? (
-                  <div className="bg-[#a1d5df] border border-[#a1d5df] rounded-lg p-4">
+                  <div className="bg-blue-100 border border-blue-100 rounded-lg p-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-5 h-5 bg-[#202d3d] rounded-full flex items-center justify-center mt-0.5">
+                      <div className="w-5 h-5 bg-blue-800 rounded-full flex items-center justify-center mt-0.5">
                         <span className="text-white text-xs">ℹ️</span>
                       </div>
                       <div className="text-sm">
-                        <p className="font-medium text-[#202d3d] mb-1">Usuário já cadastrado</p>
-                        <p className="text-[#202d3d]">
+                        <p className="font-medium text-blue-800 mb-1">Usuário já cadastrado</p>
+                        <p className="text-blue-800">
                           Seus dados foram pré-preenchidos. Verifique as informações e prossiga com seu investimento.
                         </p>
                       </div>
@@ -1376,7 +1376,7 @@ export default function AgroDeriLanding() {
                   <Button variant="outline" onClick={handleBack} className="flex-1 bg-transparent">
                     {t("form.back")}
                   </Button>
-                  <Button onClick={handleNext} className="flex-1 bg-[#202d3d] hover:bg-[#1a2530]" disabled={loading}>
+                  <Button onClick={handleNext} className="flex-1 bg-blue-600 hover:bg-blue-700" disabled={loading}>
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1412,14 +1412,14 @@ export default function AgroDeriLanding() {
                       <div
                         className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                           paymentMethod === "pix"
-                            ? "border-[#202d3d] bg-[#a1d5df]"
+                            ? "border-blue-600 bg-blue-50"
                             : "border-gray-200 hover:border-gray-300"
                         }`}
                         onClick={() => setPaymentMethod("pix")}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-6 h-6 rounded-full border-2 border-[#202d3d] flex items-center justify-center">
-                            {paymentMethod === "pix" && <div className="w-3 h-3 bg-[#202d3d] rounded-full" />}
+                          <div className="w-6 h-6 rounded-full border-2 border-blue-600 flex items-center justify-center">
+                            {paymentMethod === "pix" && <div className="w-3 h-3 bg-blue-600 rounded-full" />}
                           </div>
                           <div>
                             <p className="font-medium">{t("payment.pix")}</p>
@@ -1530,8 +1530,8 @@ export default function AgroDeriLanding() {
                 </div>
 
                 {/* Resumo do Investimento */}
-                <div className="bg-[#a1d5df] p-4 rounded-lg">
-                  <h3 className="font-semibold text-[#202d3d] mb-2">{t("payment.summary")}</h3>
+                <div className="bg-blue-100 p-4 rounded-lg">
+                  <h3 className="font-semibold text-blue-800 mb-2">{t("payment.summary")}</h3>
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
                       <span>{t("payment.investedAmount")}</span>
@@ -1550,7 +1550,7 @@ export default function AgroDeriLanding() {
                   <Button variant="outline" onClick={handleBack} className="flex-1 bg-transparent">
                     {t("form.back")}
                   </Button>
-                  <Button onClick={handlePayment} className="flex-1 bg-[#202d3d] hover:bg-[#1a2530]" disabled={loading}>
+                  <Button onClick={handlePayment} className="flex-1 bg-blue-600 hover:bg-blue-700" disabled={loading}>
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1610,7 +1610,7 @@ export default function AgroDeriLanding() {
                   </Button>
                   <Button
                     onClick={handlePaymentConfirmation}
-                    className="flex-1 bg-[#202d3d] hover:bg-[#1a2530]"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700"
                     disabled={checkingPayment}
                   >
                     {checkingPayment ? (
@@ -1667,7 +1667,7 @@ export default function AgroDeriLanding() {
                   </Button>
                   <Button
                     onClick={handlePaymentConfirmation}
-                    className="flex-1 bg-[#202d3d] hover:bg-[#1a2530]"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700"
                     disabled={checkingPayment}
                   >
                     {checkingPayment ? (
@@ -1694,8 +1694,8 @@ export default function AgroDeriLanding() {
               <CardContent className="space-y-6">
                 {contractCreated ? (
                   <>
-                    <div className="bg-[#a1d5df] p-4 rounded-lg">
-                      <h3 className="font-semibold text-[#202d3d] mb-2">{t("confirmation.contractDetails")}</h3>
+                    <div className="bg-blue-100 p-4 rounded-lg">
+                      <h3 className="font-semibold text-blue-800 mb-2">{t("confirmation.contractDetails")}</h3>
                       <div className="space-y-1 text-sm">
                         <div className="flex justify-between">
                           <span>{t("confirmation.investedAmount")}</span>
@@ -1715,7 +1715,7 @@ export default function AgroDeriLanding() {
                         <p className="text-sm text-gray-500">{t("confirmation.signContract")}</p>
                         <Button
                           asChild
-                          className="w-full bg-[#202d3d] hover:bg-[#1a2530]"
+                          className="w-full bg-blue-600 hover:bg-blue-700"
                           onClick={() => {
                             window.open(`https://app.clicksign.com/documents/${documentIdClicksign}/`)
                           }}
@@ -1736,7 +1736,7 @@ export default function AgroDeriLanding() {
                         <p className="text-sm text-gray-500">{t("confirmation.downloadContract")}</p>
                         <Button
                           asChild
-                          className="w-full bg-[#202d3d] hover:bg-[#1a2530]"
+                          className="w-full bg-blue-600 hover:bg-blue-700"
                           onClick={() => {
                             window.open(contractDownloadUrl)
                           }}
@@ -1765,7 +1765,7 @@ export default function AgroDeriLanding() {
                       resetCheckout()
                       updateUrlForStep(0)
                     }}
-                    className="flex-1 bg-[#202d3d] hover:bg-[#1a2530]"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700"
                   >
                     {t("confirmation.done")}
                   </Button>
@@ -1782,15 +1782,15 @@ export default function AgroDeriLanding() {
           <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-2xl shadow-2xl max-w-4xl w-full relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-yellow-400/20 to-transparent"></div>
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-yellow-400/10 rounded-full blur-xl"></div>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-yellow-400/5 rounded-full blur-xl"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-400/20 to-transparent"></div>
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-400/5 rounded-full blur-xl"></div>
             </div>
 
             <div className="relative flex">
               <div className="flex-1 p-6 border-r border-gray-700">
                 <div className="text-center mb-4">
-                  <h3 className="text-lg font-bold text-yellow-400 mb-2">Evolução dos Rendimentos</h3>
+                  <h3 className="text-lg font-bold text-blue-400 mb-2">Evolução dos Rendimentos</h3>
                   <p className="text-sm text-gray-400">Últimos 12 meses</p>
                 </div>
 
@@ -1813,7 +1813,7 @@ export default function AgroDeriLanding() {
                     ].map((data, index) => (
                       <div key={index} className="flex flex-col items-center group relative">
                         <div
-                          className="w-6 bg-gradient-to-t from-yellow-600 to-yellow-400 rounded-t hover:from-yellow-500 hover:to-yellow-300 transition-colors duration-300"
+                          className="w-6 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t hover:from-blue-500 hover:to-blue-300 transition-colors duration-300"
                           style={{
                             height: `${data.height}px`,
                             maxHeight: "192px",
@@ -1863,21 +1863,21 @@ export default function AgroDeriLanding() {
 
                 {/* Header with Icon */}
                 <div className="text-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <svg className="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V19C3 20.11 3.89 21 5 21H11V19H5V3H13V9H21ZM14 13V11L20 17L14 23V21H12V13H14Z" />
                     </svg>
                   </div>
 
-                  <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200 mb-2">
+                  <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 mb-2">
                     SEJA BEM-VINDO AO
                   </h2>
-                  <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200 mb-4">
+                  <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 mb-4">
                     PORTAL DOS QUE FAZEM DINHEIRO
                   </h3>
 
                   <div className="flex items-center justify-center gap-2 text-gray-300 text-sm mb-6">
-                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    <CheckCircle className="w-4 h-4 text-blue-400" />
                     <span>Seus rendimentos crescem mesmo enquanto você dorme</span>
                   </div>
                 </div>
@@ -1898,7 +1898,7 @@ export default function AgroDeriLanding() {
                       onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
                       className={`w-full px-4 py-3 bg-gray-800/50 border ${
                         loginErrors.username ? "border-red-500" : "border-gray-600"
-                      } rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all`}
+                      } rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all`}
                     />
                     {loginErrors.username && <p className="text-red-400 text-xs mt-1">{loginErrors.username}</p>}
                   </div>
@@ -1911,7 +1911,7 @@ export default function AgroDeriLanding() {
                       onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                       className={`w-full px-4 py-3 bg-gray-800/50 border ${
                         loginErrors.password ? "border-red-500" : "border-gray-600"
-                      } rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all`}
+                      } rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all`}
                     />
                     {loginErrors.password && <p className="text-red-400 text-xs mt-1">{loginErrors.password}</p>}
                   </div>
@@ -1921,7 +1921,7 @@ export default function AgroDeriLanding() {
                 <button
                   onClick={handleLogin}
                   disabled={loginLoading}
-                  className="w-full bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-gray-900 font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {loginLoading ? (
                     <div className="flex items-center justify-center gap-2">
