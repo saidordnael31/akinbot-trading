@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "approved-architecture-pending-onchain-validation",
+  "token": {
+    "name": "AgroDeri Token",
+    "symbol": "AGD",
+    "canonicalChainId": 56,
+    "canonicalNetwork": "BNB Smart Chain",
+    "canonicalAddress": "0xFDA7c8B1565Ad517D0e668A7c4e9129682b8b268",
+    "decimals": 18,
+    "gasAsset": "BNB"
+  },
+  "supply": {
+    "maximumTokens": "10000000000",
+    "maximumBaseUnits": "10000000000000000000000000000",
+    "mintAfterTge": false,
+    "burnAllowed": true,
+    "remintAfterBurn": false,
+    "deprecatedMaximumTokens": "21000000000"
+  },
+  "institutionalReferences": {
+    "warrantPercentFullyDiluted": 3,
+    "warrantTokenQuantity": "300000000",
+    "gemFacilityMaximumUsd": "20000000",
+    "notes": [
+      "Facility drawdowns, TWAP rules, threshold prices, exercise price and vesting must come from definitive signed instruments.",
+      "No facility amount is treated as available capital before a valid drawdown is completed and funds are received.",
+      "The warrant registry must define treatment of burns, bridges and fully diluted supply."
+    ]
+  },
+  "economicRoles": [
+    "payment-of-services",
+    "oracle-staking",
+    "operator-staking",
+    "verified-contribution-rewards",
+    "fee-discounts",
+    "api-licensing",
+    "dispute-deposits",
+    "liquidity-incentives",
+    "limited-technical-governance",
+    "market-launch-sponsorship"
+  ],
+  "prohibitedAssumptions": [
+    "agd-is-gas",
+    "agd-is-universal-collateral",
+    "agd-price-is-guaranteed",
+    "future-token-sales-guarantee-liquidity",
+    "community-members-are-committed-capital",
+    "unreceived-facility-capital-is-available"
+  ],
+  "networkExpansion": {
+    "bridgeRequiredForMvp": false,
+    "economicSupplyInvariant": "circulatingCanonicalSupply + sum(mirrorSupply) <= 10000000000",
+    "mirrorInvariant": "mirrorSupply[i] <= lockedCanonicalSupply[i]"
+  }
+}
