@@ -15,6 +15,7 @@ O código existente contém componentes visuais e fluxos simulados. Ele **não d
 - simulação;
 - paper trading;
 - leitura on-chain;
+- OKX Demo Trading controlado;
 - documentação de contratos e riscos;
 - integração com testnet após validação técnica.
 
@@ -66,17 +67,25 @@ O sistema deverá suportar cinco ambientes patrimonialmente segregados:
 
 ## Integrações de exchange
 
-### OKX — Fase 1
+### OKX — Demo Trading controlado
 
-O primeiro conector de exchange está implementado em modo **demo/read-only**:
+O primeiro conector possui:
 
 - assinatura REST HMAC-SHA256;
-- horário público e descoberta de instrumentos;
-- validação autenticada da configuração da conta;
+- horário público, instrumentos e ticker;
+- leitura autenticada de configuração e saldo;
 - health check em `GET /api/exchanges/okx/health`;
-- nenhuma função de envio, cancelamento, transferência ou saque.
+- ordem spot limitada em Demo Trading;
+- cancelamento e consulta de ordem;
+- kill switch com cancelamento de pendências e Cancel All After;
+- idempotência por `requestId`;
+- allowlist de instrumentos;
+- limite de notional e desvio de preço;
+- autorização por Capital Cell e Risk Cell;
+- token interno obrigatório;
+- produção bloqueada no código.
 
-Consulte `docs/OKX_INTEGRATION.md` antes de configurar qualquer segredo.
+Consulte `docs/OKX_DEMO_RUNBOOK.md` antes de configurar os segredos.
 
 ## Documentação
 
@@ -86,6 +95,7 @@ Consulte `docs/OKX_INTEGRATION.md` antes de configurar qualquer segredo.
 - `docs/INSTITUTIONAL_INTEGRATION.md`
 - `docs/QUANTUM_RESEARCH.md`
 - `docs/OKX_INTEGRATION.md`
+- `docs/OKX_DEMO_RUNBOOK.md`
 - `config/deployments/bsc-mainnet.json`
 - `config/tokenomics/agd.json`
 
