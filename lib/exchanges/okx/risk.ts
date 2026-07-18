@@ -26,6 +26,19 @@ function readString(value: unknown, field: string): string {
   return value.trim()
 }
 
+function readIdentifier(value: unknown, field: string): string {
+  const identifier = readString(value, field)
+
+  if (!/^[A-Za-z0-9_-]{3,64}$/.test(identifier)) {
+    throw new OkxRiskError(
+      `${field} must contain 3-64 letters, numbers, underscores or hyphens`,
+      "INVALID_EXECUTION_CONTEXT",
+    )
+  }
+
+  return identifier
+}
+
 function parseSide(value: unknown): OkxOrderSide {
   if (value === "buy" || value === "sell") {
     return value
@@ -86,6 +99,9 @@ export function parseOkxDemoOrderInput(payload: unknown): OkxDemoOrderInput {
 
   return {
     requestId,
+    capitalCellId: readIdentifier(record.capitalCellId, "capitalCellId"),
+    riskCellId: readIdentifier(record.riskCellId, "riskCellId"),
+    strategyId: readIdentifier(record.strategyId, "strategyId"),
     instId,
     side: parseSide(record.side),
     price,
@@ -98,6 +114,22 @@ export async function validateOkxDemoOrder(
   client: OkxRestClient,
   safety: OkxTradingSafetyConfig,
 ): Promise<OkxValidatedDemoOrder> {
+  if (input.capitalCellId !== safety.allowedCapitalCellId) {
+    throw new OkxRiskError(
+      "Capital Cell is not authorized for the OKX demo connector",
+      "CAPITAL_CELL_NOT_ALLOWED",
+      403,
+    )
+  }
+
+  if (input.riskCellId !== safety.allowedRiskCellId) {
+    throw new OkxRiskError(
+      "Risk Cell is not authorized for the OKX demo connector",
+      "RISK_CELL_NOT_ALLOWED",
+      403,
+    )
+  }
+
   if (!safety.allowedInstruments.includes(input.instId)) {
     throw new OkxRiskError("Instrument is not in the OKX demo allowlist", "INSTRUMENT_NOT_ALLOWED", 403)
   }
@@ -179,6 +211,11 @@ export async function validateOkxDemoOrder(
       px: input.price,
       clOrdId: createClientOrderId(input.requestId),
       tag: "AKINDEMO",
+    },
+    executionContext: {
+      capitalCellId: input.capitalCellId,
+      riskCellId: input.riskCellId,
+      strategyId: input.strategyId,
     },
     lastPrice,
     notionalUsdt,
