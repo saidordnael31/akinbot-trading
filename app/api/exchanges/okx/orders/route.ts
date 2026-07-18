@@ -58,8 +58,7 @@ export async function POST(request: Request) {
     const safety = getOkxTradingSafetyConfig()
     const validated = await validateOkxDemoOrder(input, client, safety)
 
-    // Arm OKX Cancel All After before submitting the order. This is a
-    // protection mechanism, not part of the strategy.
+    // Cancel All After is armed before submission as an exchange-side safety net.
     await client.cancelAllAfter(safety.cancelAllAfterSeconds)
 
     const acknowledgement = await client.placeOrder(validated.request)
@@ -69,6 +68,7 @@ export async function POST(request: Request) {
         ok: true,
         exchange: "okx",
         mode: "demo",
+        executionContext: validated.executionContext,
         order: acknowledgement,
         risk: {
           instrument: validated.request.instId,
