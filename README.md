@@ -64,6 +64,20 @@ O sistema deverá suportar cinco ambientes patrimonialmente segregados:
 - contratos públicos são lidos por meio de um deployment registry, nunca por endereços espalhados no código;
 - nenhuma promessa de rentabilidade, liquidez ou valorização deve ser inferida deste repositório.
 
+## Integrações de exchange
+
+### OKX — Fase 1
+
+O primeiro conector de exchange está implementado em modo **demo/read-only**:
+
+- assinatura REST HMAC-SHA256;
+- horário público e descoberta de instrumentos;
+- validação autenticada da configuração da conta;
+- health check em `GET /api/exchanges/okx/health`;
+- nenhuma função de envio, cancelamento, transferência ou saque.
+
+Consulte `docs/OKX_INTEGRATION.md` antes de configurar qualquer segredo.
+
 ## Documentação
 
 - `docs/ARCHITECTURE.md`
@@ -71,6 +85,7 @@ O sistema deverá suportar cinco ambientes patrimonialmente segregados:
 - `docs/AGD_ECOSYSTEM.md`
 - `docs/INSTITUTIONAL_INTEGRATION.md`
 - `docs/QUANTUM_RESEARCH.md`
+- `docs/OKX_INTEGRATION.md`
 - `config/deployments/bsc-mainnet.json`
 - `config/tokenomics/agd.json`
 
