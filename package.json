@@ -1,12 +1,15 @@
 {
-  "name": "my-v0-project",
+  "name": "akin-quant-engine",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "validate:deployments": "node scripts/validate-deployments.mjs",
+    "check": "pnpm validate:deployments && pnpm typecheck && pnpm build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
