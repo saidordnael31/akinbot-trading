@@ -10,6 +10,7 @@ The connector supports:
 - public instruments and ticker data;
 - authenticated account configuration and balance reads;
 - guarded spot limit orders in demo mode;
+- Capital Cell and Risk Cell authorization;
 - individual order cancellation;
 - order status lookup;
 - pending-order cancellation and Cancel All After kill switch.
@@ -38,6 +39,8 @@ OKX_ENABLE_ORDER_WRITES=false
 OKX_TRADING_KILL_SWITCH=true
 OKX_INTERNAL_ORDER_TOKEN=<long-random-secret>
 OKX_ALLOWED_INSTRUMENTS=BTC-USDT,ETH-USDT
+OKX_ALLOWED_CAPITAL_CELL_ID=akin-proprietary-demo
+OKX_ALLOWED_RISK_CELL_ID=okx-demo-spot
 OKX_MAX_ORDER_NOTIONAL_USDT=25
 OKX_MAX_LIMIT_DEVIATION_BPS=500
 OKX_CANCEL_ALL_AFTER_SECONDS=30
@@ -48,7 +51,7 @@ OKX_CANCEL_ALL_AFTER_SECONDS=30
 1. Deploy with `OKX_ENABLE_ORDER_WRITES=false` and `OKX_TRADING_KILL_SWITCH=true`.
 2. Call `GET /api/exchanges/okx/health` and confirm public and authenticated reads.
 3. Confirm the API key was created inside OKX Demo Trading.
-4. Confirm the allowlist and order-notional limit.
+4. Confirm the instrument allowlist, Capital Cell, Risk Cell and order-notional limit.
 5. Set `OKX_ENABLE_ORDER_WRITES=true`.
 6. Keep `OKX_TRADING_KILL_SWITCH=true` until the exact demo order is ready.
 7. Set `OKX_TRADING_KILL_SWITCH=false` only for the controlled test window.
@@ -71,6 +74,9 @@ x-akin-order-token: <OKX_INTERNAL_ORDER_TOKEN>
 
 {
   "requestId": "manual-test-0001",
+  "capitalCellId": "akin-proprietary-demo",
+  "riskCellId": "okx-demo-spot",
+  "strategyId": "manual-limit-test",
   "instId": "BTC-USDT",
   "side": "buy",
   "price": "50000",
@@ -83,13 +89,14 @@ The endpoint:
 1. validates the internal token;
 2. checks demo mode and credentials;
 3. checks the kill switch and write flag;
-4. verifies the instrument allowlist;
-5. loads current instrument metadata and ticker;
-6. validates tick size, lot size and minimum size;
-7. checks notional and price deviation limits;
-8. derives a deterministic `clOrdId` from `requestId`;
-9. arms OKX Cancel All After;
-10. submits a limit order.
+4. authorizes the Capital Cell and Risk Cell;
+5. verifies the instrument allowlist;
+6. loads current instrument metadata and ticker;
+7. validates tick size, lot size and minimum size;
+8. checks notional and price deviation limits;
+9. derives a deterministic `clOrdId` from `requestId`;
+10. arms OKX Cancel All After;
+11. submits a limit order.
 
 Repeating the same `requestId` produces the same client order ID.
 
