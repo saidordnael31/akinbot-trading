@@ -2,12 +2,18 @@ import { createHmac } from "node:crypto"
 import type {
   OkxAccountBalance,
   OkxAccountConfig,
+  OkxCancelAllAfterResult,
+  OkxCancelOrderRequest,
   OkxClientConfig,
   OkxEnvelope,
   OkxHttpMethod,
   OkxInstrument,
   OkxInstrumentType,
+  OkxOrderAck,
+  OkxOrderDetails,
+  OkxPlaceOrderRequest,
   OkxServerTime,
+  OkxTicker,
 } from "./types"
 
 interface RequestOptions {
@@ -47,6 +53,18 @@ function buildRequestPath(
 
   const queryString = params.toString()
   return queryString ? `${path}?${queryString}` : path
+}
+
+function assertSuccessfulOrderAck(ack: OkxOrderAck | undefined): OkxOrderAck {
+  if (!ack) {
+    throw new OkxApiError("OKX returned an empty order acknowledgement", "EMPTY_ORDER_ACK")
+  }
+
+  if (ack.sCode !== "0") {
+    throw new OkxApiError(ack.sMsg || "OKX rejected the order operation", ack.sCode)
+  }
+
+  return ack
 }
 
 export class OkxRestClient {
@@ -144,10 +162,17 @@ export class OkxRestClient {
     })
   }
 
-  getInstruments(instType: OkxInstrumentType): Promise<OkxInstrument[]> {
+  getInstruments(instType: OkxInstrumentType, instId?: string): Promise<OkxInstrument[]> {
     return this.request<OkxInstrument[]>({
       path: "/api/v5/public/instruments",
-      query: { instType },
+      query: { instType, instId },
+    })
+  }
+
+  getTicker(instId: string): Promise<OkxTicker[]> {
+    return this.request<OkxTicker[]>({
+      path: "/api/v5/market/ticker",
+      query: { instId },
     })
   }
 
@@ -162,6 +187,65 @@ export class OkxRestClient {
     return this.request<OkxAccountBalance[]>({
       path: "/api/v5/account/balance",
       query: { ccy: currency },
+      authenticated: true,
+    })
+  }
+
+  async placeOrder(order: OkxPlaceOrderRequest): Promise<OkxOrderAck> {
+    if (this.config.mode !== "demo") {
+      throw new OkxApiError("Order writes are restricted to OKX demo mode", "PRODUCTION_WRITE_BLOCKED")
+    }
+
+    const data = await this.request<OkxOrderAck[]>({
+      method: "POST",
+      path: "/api/v5/trade/order",
+      body: order,
+      authenticated: true,
+    })
+
+    return assertSuccessfulOrderAck(data[0])
+  }
+
+  async cancelOrder(request: OkxCancelOrderRequest): Promise<OkxOrderAck> {
+    if (this.config.mode !== "demo") {
+      throw new OkxApiError("Order writes are restricted to OKX demo mode", "PRODUCTION_WRITE_BLOCKED")
+    }
+
+    const data = await this.request<OkxOrderAck[]>({
+      method: "POST",
+      path: "/api/v5/trade/cancel-order",
+      body: request,
+      authenticated: true,
+    })
+
+    return assertSuccessfulOrderAck(data[0])
+  }
+
+  getOrderDetails(request: OkxCancelOrderRequest): Promise<OkxOrderDetails[]> {
+    return this.request<OkxOrderDetails[]>({
+      path: "/api/v5/trade/order",
+      query: request,
+      authenticated: true,
+    })
+  }
+
+  getPendingOrders(instId?: string): Promise<OkxOrderDetails[]> {
+    return this.request<OkxOrderDetails[]>({
+      path: "/api/v5/trade/orders-pending",
+      query: { instType: "SPOT", instId },
+      authenticated: true,
+    })
+  }
+
+  cancelAllAfter(timeOut: number, tag = "AKINDEMO"): Promise<OkxCancelAllAfterResult[]> {
+    if (this.config.mode !== "demo") {
+      throw new OkxApiError("Order writes are restricted to OKX demo mode", "PRODUCTION_WRITE_BLOCKED")
+    }
+
+    return this.request<OkxCancelAllAfterResult[]>({
+      method: "POST",
+      path: "/api/v5/trade/cancel-all-after",
+      body: { timeOut: String(timeOut), tag },
       authenticated: true,
     })
   }
