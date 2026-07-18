@@ -11,6 +11,8 @@ const DEFAULT_MAX_ORDER_NOTIONAL_USDT = 25
 const DEFAULT_MAX_LIMIT_DEVIATION_BPS = 500
 const DEFAULT_CANCEL_ALL_AFTER_SECONDS = 30
 const DEFAULT_ALLOWED_INSTRUMENTS = ["BTC-USDT", "ETH-USDT"]
+const DEFAULT_CAPITAL_CELL_ID = "akin-proprietary-demo"
+const DEFAULT_RISK_CELL_ID = "okx-demo-spot"
 
 const ALLOWED_BASE_URLS = new Set([
   "https://www.okx.com",
@@ -96,11 +98,19 @@ function parseAllowedInstruments(value: string | undefined): string[] {
   return [...new Set(instruments)]
 }
 
+function requiredIdentifier(value: string | undefined, fallback: string, name: string): string {
+  const identifier = (value || fallback).trim()
+
+  if (!/^[a-z0-9-]{3,64}$/.test(identifier)) {
+    throw new Error(`${name} must contain 3-64 lowercase letters, numbers or hyphens`)
+  }
+
+  return identifier
+}
+
 export function getOkxClientConfig(): OkxClientConfig {
   const mode = getMode(process.env.OKX_MODE)
 
-  // Production writes remain blocked. This connector is intentionally limited
-  // to OKX Demo Trading until the institutional risk stack is validated.
   if (mode !== "demo") {
     throw new Error("OKX production mode is blocked")
   }
@@ -116,10 +126,19 @@ export function getOkxClientConfig(): OkxClientConfig {
 export function getOkxTradingSafetyConfig(): OkxTradingSafetyConfig {
   return {
     orderWritesEnabled: process.env.OKX_ENABLE_ORDER_WRITES === "true",
-    // Default-on kill switch: trading must be explicitly unlocked.
     killSwitchActive: process.env.OKX_TRADING_KILL_SWITCH !== "false",
     internalOrderToken: process.env.OKX_INTERNAL_ORDER_TOKEN?.trim() || undefined,
     allowedInstruments: parseAllowedInstruments(process.env.OKX_ALLOWED_INSTRUMENTS),
+    allowedCapitalCellId: requiredIdentifier(
+      process.env.OKX_ALLOWED_CAPITAL_CELL_ID,
+      DEFAULT_CAPITAL_CELL_ID,
+      "OKX_ALLOWED_CAPITAL_CELL_ID",
+    ),
+    allowedRiskCellId: requiredIdentifier(
+      process.env.OKX_ALLOWED_RISK_CELL_ID,
+      DEFAULT_RISK_CELL_ID,
+      "OKX_ALLOWED_RISK_CELL_ID",
+    ),
     maxOrderNotionalUsdt: parsePositiveNumber(
       process.env.OKX_MAX_ORDER_NOTIONAL_USDT,
       DEFAULT_MAX_ORDER_NOTIONAL_USDT,
