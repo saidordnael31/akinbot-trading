@@ -1,160 +1,94 @@
-# OKX Integration — Phase 1
+# OKX Integration
 
-## Status
+## Current phase
 
-The OKX connector is implemented as **demo/read-only infrastructure**.
+The connector now supports **controlled OKX Demo Trading**. Production mode remains blocked in code.
 
-Current capabilities:
+Implemented capabilities:
 
-- public server-time check;
-- public instrument discovery;
-- authenticated account-configuration check;
-- authenticated balance retrieval in the server-side client;
-- signed REST requests using HMAC-SHA256;
-- demo header support;
-- request timeout and sanitized errors;
-- no order placement, cancellation, transfer or withdrawal methods.
+- HMAC-SHA256 REST authentication;
+- OKX demo header support;
+- public server time, instruments and ticker;
+- authenticated account configuration and balance reads;
+- guarded USDT-quoted spot limit orders;
+- deterministic client order IDs derived from `requestId`;
+- individual order cancellation;
+- order status lookup;
+- pending-order cancellation;
+- OKX Cancel All After protection;
+- internal endpoint token;
+- instrument allowlist;
+- Capital Cell and Risk Cell authorization;
+- per-order notional and price-deviation limits;
+- production-write blocking.
 
-## Immediate credential action
+## Credential handling
 
-Any API credential pasted into chat, tickets, documents or source code must be treated as exposed.
+The API key, secret key and passphrase must be stored directly in the deployment secret manager. They must never be committed to GitHub, exposed through frontend variables or returned by API responses.
 
-Required action:
-
-1. revoke the exposed API key in OKX;
-2. create a new **Demo Trading API key**;
-3. begin with `Read` permission;
-4. bind the key to an approved server IP when a stable outbound IP exists;
-5. store the key, secret and passphrase directly in the deployment secret manager;
-6. never place secrets in GitHub, Vercel build logs, screenshots or frontend variables.
-
-The OKX passphrase is required for authenticated requests. It must not be shared in chat.
-
-## Environment variables
-
-Copy `.env.example` to a local `.env.local` and populate it outside version control:
-
-```bash
-OKX_MODE=demo
-OKX_BASE_URL=https://www.okx.com
-OKX_API_KEY=...
-OKX_API_SECRET=...
-OKX_API_PASSPHRASE=...
-OKX_ENABLE_PRIVATE_READS=true
-OKX_ENABLE_ORDER_WRITES=false
-```
-
-The REST host must match the region associated with the OKX account. The connector only permits explicitly approved OKX hosts.
-
-## Health endpoint
-
-```text
-GET /api/exchanges/okx/health
-```
-
-The endpoint validates:
-
-1. local configuration;
-2. access to the OKX public API;
-3. signed authentication when all three secrets are configured.
-
-It never returns:
+Authenticated OKX requests require all three values:
 
 - API key;
-- API secret;
-- passphrase;
-- signature;
-- request headers;
-- account balance;
-- positions;
-- order history.
+- secret key;
+- passphrase.
 
-Example response without private credentials:
+## Required environment
 
-```json
-{
-  "ok": true,
-  "exchange": "okx",
-  "mode": "demo",
-  "baseUrl": "https://www.okx.com",
-  "publicApi": "ok",
-  "authenticatedApi": "not-configured",
-  "checkedAt": "2026-07-18T00:00:00.000Z"
-}
+See `.env.example` for the complete list. The initial execution perimeter is:
+
+```env
+OKX_MODE=demo
+OKX_ENABLE_ORDER_WRITES=false
+OKX_TRADING_KILL_SWITCH=true
+OKX_ALLOWED_CAPITAL_CELL_ID=akin-proprietary-demo
+OKX_ALLOWED_RISK_CELL_ID=okx-demo-spot
+OKX_MAX_ORDER_NOTIONAL_USDT=25
 ```
 
-## Signing model
+Order writes require all of the following simultaneously:
 
-Authenticated requests use:
+1. demo mode;
+2. complete credentials;
+3. `OKX_ENABLE_ORDER_WRITES=true`;
+4. `OKX_TRADING_KILL_SWITCH=false`;
+5. a configured internal order token;
+6. the correct internal token in the request header;
+7. an authorized Capital Cell;
+8. an authorized Risk Cell;
+9. an allowlisted instrument;
+10. successful pre-trade checks.
+
+## Endpoints
 
 ```text
-prehash = timestamp + method + requestPath + body
-signature = Base64(HMAC-SHA256(prehash, apiSecret))
+GET  /api/exchanges/okx/health
+POST /api/exchanges/okx/orders
+GET  /api/exchanges/okx/orders/status
+POST /api/exchanges/okx/orders/cancel
+POST /api/exchanges/okx/kill-switch
 ```
 
-Required private headers:
+Operational examples and activation sequence are documented in `docs/OKX_DEMO_RUNBOOK.md`.
 
-- `OK-ACCESS-KEY`;
-- `OK-ACCESS-SIGN`;
-- `OK-ACCESS-TIMESTAMP`;
-- `OK-ACCESS-PASSPHRASE`.
+## Deliberately unsupported
 
-Demo requests also use:
+- production trading;
+- withdrawals and transfers;
+- market orders;
+- margin orders;
+- swaps, futures and options execution;
+- autonomous strategy execution;
+- unrestricted public order endpoints.
 
-```text
-x-simulated-trading: 1
-```
+## Remaining work before autonomous demo execution
 
-## Safety boundary
-
-`OKX_ENABLE_ORDER_WRITES=true` does not enable trading. The current client deliberately exposes no write method.
-
-Before any demo order method is added, the repository must contain:
-
-- typed OrderIntent;
-- Capital Cell and Risk Cell authorization;
-- per-instrument notional limit;
+- persistent order and execution ledger;
+- WebSocket order and fill stream;
+- reconciliation worker;
+- maximum open-order count;
+- daily turnover limit;
 - daily loss limit;
-- maximum open-order limit;
-- price-deviation control;
-- duplicate-order protection;
-- client-order-id idempotency;
-- stale-market-data rejection;
-- kill switch;
-- immutable audit event;
-- explicit demo-only enforcement.
-
-Production trading remains blocked until a separate approval process is completed.
-
-## Planned next stages
-
-### Phase 2 — market data
-
-- public WebSocket;
-- normalized trades and order books;
-- funding rates;
-- mark and index prices;
-- instrument metadata;
-- latency and staleness monitoring.
-
-### Phase 3 — private demo state
-
-- balances;
-- positions;
-- open orders;
-- fills;
-- fee rates;
-- margin and account mode.
-
-### Phase 4 — controlled demo execution
-
-Only after Risk Engine integration:
-
-- limit orders;
-- post-only orders;
-- cancellation;
-- two-leg execution coordinator;
-- reconciliation;
-- emergency cancel-all.
-
-No production capital is included in these phases.
+- stale-data clock based on exchange timestamps;
+- audit-event persistence;
+- multi-leg execution coordinator;
+- integration with the full off-chain Risk Engine.
