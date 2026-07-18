@@ -1,30 +1,86 @@
-# V0.dev project
+# Akin Quant Engine — AgroDeri
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Plataforma quantitativa e de risco para pesquisa, simulação, execução controlada e integração futura com a infraestrutura AgroDeri.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/saidordnael31s-projects/v0-v0-dev-project)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/GFKpjAHPWXl)
+## Estado atual
 
-## Overview
+Este repositório está em **recuperação arquitetural** a partir do protótipo original Akin Trading.
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+O código existente contém componentes visuais e fluxos simulados. Ele **não deve ser interpretado como motor quantitativo validado, plataforma de clearing operacional ou sistema autorizado a movimentar capital de terceiros**.
 
-## Deployment
+### Modos permitidos nesta fase
 
-Your project is live at:
+- pesquisa;
+- backtesting;
+- simulação;
+- paper trading;
+- leitura on-chain;
+- documentação de contratos e riscos;
+- integração com testnet após validação técnica.
 
-**[https://vercel.com/saidordnael31s-projects/v0-v0-dev-project](https://vercel.com/saidordnael31s-projects/v0-v0-dev-project)**
+### Modos bloqueados por padrão
 
-## Build your app
+- execução com capital real;
+- uso de credenciais de produção;
+- movimentação de colateral;
+- clearing ou settlement real;
+- uso de recursos da Nickel, GEM, clientes ou comunidades;
+- apresentação de métricas simuladas como performance auditada.
 
-Continue building your app on:
+## Visão do sistema
 
-**[https://v0.dev/chat/projects/GFKpjAHPWXl](https://v0.dev/chat/projects/GFKpjAHPWXl)**
+```text
+Market Data
+    ↓
+Akin Quant Engine
+    ↓
+Risk Engine off-chain
+    ↓
+Execution / Hedge Router
+    ↓
+AgroDeri Contracts
+    ↓
+Clearing
+    ↓
+Settlement
+```
 
-## How It Works
+O sistema deverá suportar cinco ambientes patrimonialmente segregados:
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+1. Akin Proprietary Trading;
+2. Nickel Institutional Pod;
+3. AGD Liquidity & Market Making;
+4. AgroDeri Derivatives Sandbox;
+5. Akin–QuIIN Quantum Lab.
+
+## Princípios obrigatórios
+
+- capital e credenciais segregados por ambiente;
+- nenhuma garantia pode ser contada em mais de uma Risk Cell;
+- AGD não integra automaticamente o capital principal de absorção de perdas;
+- parâmetros de margem e risco são versionados;
+- clearing calcula obrigações; settlement movimenta ativos;
+- módulos quânticos são experimentais e não substituem controles determinísticos;
+- contratos públicos são lidos por meio de um deployment registry, nunca por endereços espalhados no código;
+- nenhuma promessa de rentabilidade, liquidez ou valorização deve ser inferida deste repositório.
+
+## Documentação
+
+- `docs/ARCHITECTURE.md`
+- `docs/RISK_CELLS.md`
+- `docs/AGD_ECOSYSTEM.md`
+- `docs/INSTITUTIONAL_INTEGRATION.md`
+- `docs/QUANTUM_RESEARCH.md`
+- `config/deployments/bsc-mainnet.json`
+- `config/tokenomics/agd.json`
+
+## Rede canônica inicial do AGD
+
+- Rede: BNB Smart Chain;
+- Gas: BNB;
+- Supply máximo: 10.000.000.000 AGD;
+- Decimais: 18;
+- Mint após TGE: proibido;
+- contrato canônico declarado: `0xFDA7c8B1565Ad517D0e668A7c4e9129682b8b268`.
+
+Os endereços presentes neste repositório são registros declarados e ainda precisam de validação de bytecode, ABI, proxy, owner, roles, eventos e rede antes de qualquer integração de escrita.
