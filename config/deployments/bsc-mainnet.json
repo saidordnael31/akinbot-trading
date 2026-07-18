@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "0.1.0",
+  "network": {
+    "name": "BNB Smart Chain",
+    "chainId": 56,
+    "environment": "mainnet",
+    "gasAsset": "BNB"
+  },
+  "status": "declared-unverified",
+  "lastValidatedAt": null,
+  "contracts": {
+    "agd": {
+      "address": "0xFDA7c8B1565Ad517D0e668A7c4e9129682b8b268",
+      "role": "canonical-token",
+      "status": "declared-unverified"
+    },
+    "tradingRouter": {
+      "address": "0x9232dC192D80a81C6322C27FA0908a907cfd35F8",
+      "role": "trade-routing",
+      "status": "declared-unverified"
+    },
+    "spotEngine": {
+      "address": "0x552ad990e8B002aeDfE8B7DaDE57a4b26D2DBd37",
+      "role": "spot-engine",
+      "status": "declared-unverified"
+    },
+    "positionManager": {
+      "address": "0xB9D17A00aF0d89979d314076431802740bddEcD3",
+      "role": "position-accounting",
+      "status": "declared-unverified"
+    },
+    "marketMakerRouter": {
+      "address": "0x11c6b708dEE92a9C5bE759A32F5545f6ed8bb0b1",
+      "role": "market-maker-routing",
+      "status": "declared-unverified"
+    },
+    "riskEngine": {
+      "address": "0xA71d859b24Cba6e32d18131f1aFa8C098181E391",
+      "role": "on-chain-risk-controls",
+      "status": "declared-unverified"
+    },
+    "pricingEngine": {
+      "address": "0x296b745706000F65A5984165F370Fa3Ac0F5af78",
+      "role": "pricing",
+      "status": "declared-unverified"
+    },
+    "oracle": {
+      "address": "0xFa84cbF049366f3ce5495217bB1EFA3f9DB09768",
+      "role": "oracle",
+      "status": "declared-unverified"
+    },
+    "rlpVault": {
+      "address": "0x9358eed4Ca74ed63867e436b9Fade2fF5aFdb07B",
+      "role": "risk-liquidity-pool",
+      "status": "declared-unverified"
+    },
+    "collateralVault": {
+      "address": "0x40034675976a3f90163A30f361609E5652C06138",
+      "role": "collateral-custody",
+      "status": "declared-unverified"
+    },
+    "settlement": {
+      "address": "0xc035DE51bc4Af38ac47A32151312c2040E716234",
+      "role": "settlement",
+      "status": "declared-unverified"
+    },
+    "feeCollector": {
+      "address": "0x973254b0D9C9d0b1B5bFc4FA294c2e5856Ca2c1a",
+      "role": "fee-collection",
+      "status": "declared-unverified"
+    },
+    "instrumentRegistry": {
+      "address": "0x8355AbedE1dC4b2836153c6eAeEdc7A2Fafd9376",
+      "role": "instrument-registry",
+      "status": "declared-unverified"
+    },
+    "clearingEngine": {
+      "address": null,
+      "role": "clearing-netting-margin-default",
+      "status": "missing-address"
+    }
+  },
+  "externalAssets": {
+    "usdt": {
+      "address": "0x55d398326f99059fF775485246999027B3197955",
+      "status": "declared-unverified"
+    },
+    "usdc": {
+      "address": null,
+      "status": "pending-registry"
+    },
+    "brla": {
+      "address": null,
+      "status": "pending-registry"
+    },
+    "brln": {
+      "address": null,
+      "status": "pending-registry"
+    },
+    "brz": {
+      "address": null,
+      "status": "pending-registry"
+    },
+    "paxg": {
+      "address": null,
+      "status": "pending-registry"
+    },
+    "xaut": {
+      "address": null,
+      "status": "pending-registry"
+    }
+  },
+  "agroderiAssets": {
+    "brsa": {
+      "address": null,
+      "status": "pending-deployment-registry"
+    },
+    "brwa": {
+      "address": null,
+      "status": "pending-deployment-registry"
+    }
+  },
+  "validationRequired": [
+    "chain-id",
+    "deployed-bytecode",
+    "verified-source",
+    "abi",
+    "proxy-implementation",
+    "owner",
+    "roles",
+    "pausable-state",
+    "upgrade-policy",
+    "events",
+    "contract-dependencies"
+  ]
+}
