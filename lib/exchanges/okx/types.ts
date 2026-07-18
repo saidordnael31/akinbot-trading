@@ -28,6 +28,8 @@ export interface OkxTradingSafetyConfig {
   killSwitchActive: boolean
   internalOrderToken?: string
   allowedInstruments: string[]
+  allowedCapitalCellId: string
+  allowedRiskCellId: string
   maxOrderNotionalUsdt: number
   maxLimitDeviationBps: number
   cancelAllAfterSeconds: number
@@ -180,14 +182,24 @@ export interface OkxHealthResult {
 
 export interface OkxDemoOrderInput {
   requestId: string
+  capitalCellId: string
+  riskCellId: string
+  strategyId: string
   instId: string
   side: OkxOrderSide
   price: string
   size: string
 }
 
+export interface OkxExecutionContext {
+  capitalCellId: string
+  riskCellId: string
+  strategyId: string
+}
+
 export interface OkxValidatedDemoOrder {
   request: OkxPlaceOrderRequest
+  executionContext: OkxExecutionContext
   lastPrice: number
   notionalUsdt: number
   deviationBps: number
